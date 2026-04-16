@@ -55,8 +55,14 @@ let salary = 100000;
 salary = null;
 console.log(salary);
 
-//symbol => 
-
+//symbol =>  Symbol represents a unique hidden identifier inside an object.
+let countryOfOrigin = Symbol();
+let productInfo = {
+    productName: "IPhone 16",
+    price: 100000,
+    [countryOfOrigin] : "China"
+}
+console.log(productInfo);
 
 /***********************************************/
 /*********Non-Primitive Data Types**************/
@@ -98,3 +104,72 @@ console.log(fruitsAndPrices[3]);
 
 
 //function => A function represents a block of code or collection of statements to complete a particular task. 
+// Test Case 3: verify the account statement
+console.log("******************TEST CASE 3: VERIFY THE ACCOUNT STATEMENT******************");
+launchBrowserAndLogin("firefox", "https://uat.icici.com/");
+console.log("Verify the home page is displayed");
+console.log("Navigate to the account statement page");
+console.log("Verify the account statement is displayed with the following details:");
+logoutAndCloseBrowser();
+
+function launchBrowserAndLogin(browser_name, url) {
+    console.log(`Launch the ${browser_name} Browser`);
+    console.log(`Enter the URL: ${url}`);
+    console.log("Enter the username as 'Bharath' and password as 'Bharath@123'");
+    console.log("Click on the login button");
+}
+
+function logoutAndCloseBrowser() {
+    console.log("Logout from the application");
+    console.log("Close the browser");
+}
+
+function getAccountBalance() {
+    console.log("Navigate to the account balance page");
+    let accountBalance = 100000;
+    return accountBalance;
+}
+
+// Set => A set represents a collection of unique values of any data type. 
+let empIds = new Set(); //creating the empty set will store the data. 
+empIds.add(121);
+empIds.add(122);
+empIds.add(123);
+empIds.add(123);
+empIds.add(124);
+
+console.log(empIds);
+
+//Map => A map can store multiple values in the form of key-value. When it comes to a map, it is going to allow duplicate values but won't allow duplicate keys. 
+let empMap = new Map();
+empMap.set("empId", 121);
+empMap.set("empName", "Bharath");
+empMap.set("empAge", 36);
+empMap.set("empId", 122);//duplicate key
+empMap.set("empLuckyNumber", 36);//duplicate value
+console.log(empMap);
+
+//Date => The date data type represents a specific point in time.
+let currentDate = new Date();
+console.log(currentDate);
+
+//get current year
+console.log(currentDate.getFullYear());
+
+//get current month
+console.log(currentDate.getMonth() + 1); // month starts from 0 to 11
+
+//get current date
+console.log(currentDate.getDate());
+
+//get current day
+console.log(currentDate.getDay()); // day starts from 0 to 6 (0-Sunday, 1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday)
+
+//get current hours
+console.log(currentDate.getHours());
+
+//get current minutes
+console.log(currentDate.getMinutes());
+
+//get current seconds
+console.log(currentDate.getSeconds());
