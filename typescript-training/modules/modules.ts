@@ -1,0 +1,2 @@
+//modules in typescript : Module is all about: each and every file will be treated as an independent component within the TypeScript. Whenever we want to share any data or common method from one file to another file,
+//  we need to manually export from the source file and import in the target file. 
