@@ -13,6 +13,26 @@
 
 // technique: target -> target's sibling -> parent -> ancestor -> ancestor's parent
 
+//Syntax : referenceElementXPath/relationship::targetElementXPath
+
+//child
+//parent
+//ancestor
+//following-sibling
+//preceding-sibling
+//following
+//preceding
+// /->child
+// // -> within the family tree.
+
+//ancestor: //ul[@class="leftmenu"]
+//parent : //li
+//sibling : NA
+//target element : //a[text()='Services']
+
+//ul[@class="leftmenu"]/child::li/child::a[text()='Services']
+//ul[@class="leftmenu"]//a[text()='Services']
+//li[@class="Solutions"]/following-sibling::li/child::a[text()='Services']
 
 import { test, expect } from '@playwright/test';
 
