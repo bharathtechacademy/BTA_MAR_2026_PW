@@ -16,7 +16,7 @@ test('Parabank Home Page Validations', async ({ page }) => {
     console.log("Parabank caption is matching with the expected value.");
 
     // 4.Enter invalid username
-    const username = await page.locator('input[name="username"]');
+    const username = await page.getByRole('textbox', { name: 'username' });
     await username.fill("Invalid User");
 
     // 5.Enter empty Password
