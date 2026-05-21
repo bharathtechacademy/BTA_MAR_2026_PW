@@ -1,0 +1,21 @@
+{
+    "app":{
+        "url":"http://localhost:3000",
+        "username":"admin",
+        "password":"admin"
+    },
+    "api":{
+        "url":"http://localhost:3000/api"
+    },
+    "db":{
+        "host":"localhost",
+        "port":5432,
+        "username":"postgres",
+        "password":"postgres",
+        "database":"testdb"
+    },
+    "ollama":{
+        "url":"http://localhost:11434",
+        "model":"ollama/llama-2-7b-chat"
+    }
+}

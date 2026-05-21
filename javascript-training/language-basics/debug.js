@@ -40,6 +40,6 @@ console.log("Executing Line 10");
 
 //Logic to get the sum of two numbers
 function sumOfNumbers(a, b) {
-    c= a + b;
+    c= a - b;
     console.log(c);
 }
