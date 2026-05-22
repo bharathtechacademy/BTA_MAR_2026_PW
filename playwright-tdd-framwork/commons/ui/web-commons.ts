@@ -52,7 +52,7 @@ export class WebCommons {
     }
 
     //Common method to type within the text box element 
-    async typeInElement(locator: string, text: string): Promise<void> {
+    async enterText(locator: string, text: string): Promise<void> {
         const element = await this.element(locator);
         await  element.clear();
         await element.fill(text);
@@ -85,9 +85,9 @@ export class WebCommons {
     }
 
     //Common method to check if the element is visible
-    async isElementVisible(locator: string): Promise<boolean> {
+    async isElementVisible(locator: string): Promise<void> {
         const element = await this.element(locator);
-        return await element.isVisible();
+        await expect(element).toBeVisible();
     }
 
     //Common method to check if an element is disappeared 
@@ -163,6 +163,11 @@ export class WebCommons {
         } 
 
         throw new Error(`Unsupported locator method: ${method}`);
+    }
+
+    //Common method to compare the text values(actual text contained in the element and expected text)
+    async compareText(actual: string, expected: string): Promise<void> {
+        expect(actual.trim()).toContain(expected.trim());
     }
 
 }

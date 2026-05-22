@@ -1,8 +1,9 @@
 {
     "app":{
-        "url":"http://localhost:3000",
-        "username":"admin",
-        "password":"admin"
+        "url":"https://accounts.creatio.com/login/alm",
+        "title":"Log in | Creatio",
+        "username":"bharattechacademy5@outlook.com",
+        "password":"BharathTechAcademy#1234"
     },
     "api":{
         "url":"http://localhost:3000/api"

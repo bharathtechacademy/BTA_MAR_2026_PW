@@ -1,11 +1,13 @@
 {
-    "homePageHeaderLink": "span:text-is('Application Hub')",
-    "usersLink": "span:text-is('Users')",
-    "addUserButton": "button:has-text('Add user')",
-    "addUserEmailTextBox": "input[aria-label*='mail'], input[placeholder*='mail' i], input[type='email']",
-    "roleDropdown": "div[aria-label='Role']",
-    "inviteButton": "button:has-text('Invite')",
-    "profile":"span[class*='contact-photo']",
+    "homePageHeader": "button[data-item-marker='Application Hub']",
+    "usersLink": "//span[text()='Users']",
+    "addUserButton": "button.add-user",
+    "addUserEmailTextBox": "input[aria-label='Business email']",
+    "roleDropdown": "input[aria-label='Role']",
+    "roleDropdownOption":"//span[text()='option']/ancestor::mat-option",
+    "inviteButton": "//span[text()=' INVITE ']",
+    "invitaionSentToastMessage":"//div[contains(text(),'The invitation has been sent')]",
+    "profile":"//span[contains(@class,'contact-photo') and text()='BT']",
     "logoutLink":"//span[text()='Log out']",
-    "invitedUsersListSection":"text=Invited users"
+    "invitedUsersListSection":"//span[text()='Invited users']"
 }
