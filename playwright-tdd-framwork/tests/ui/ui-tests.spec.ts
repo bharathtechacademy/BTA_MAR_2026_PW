@@ -2,7 +2,7 @@ import { test, TestInfo } from '@playwright/test';
 import { LoginPageSteps } from '../../page-objects/page-steps/login-page-steps.js';
 import { HomePageSteps } from '../../page-objects/page-steps/home-page-steps.js';
 import { CookiesPageSteps } from '../../page-objects/page-steps/cookies-page-steps.js';
-import data from '../../testdata/ui/data.json' assert { type: 'json' };
+import data from '../../testdata/ui/data.json' with { type: 'json' };
 
 let loginPage: LoginPageSteps;
 let homePage: HomePageSteps;

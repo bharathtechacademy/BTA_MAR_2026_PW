@@ -62,7 +62,8 @@ let productInfo = {
     price: 100000,
     [countryOfOrigin] : "China"
 }
-console.log(productInfo);
+console.log(productInfo.countryOfOrigin);
+console.log(productInfo[countryOfOrigin]);
 
 /***********************************************/
 /*********Non-Primitive Data Types**************/
@@ -173,3 +174,6 @@ console.log(currentDate.getMinutes());
 
 //get current seconds
 console.log(currentDate.getSeconds());
+
+//timezone IST => 330 minutes
+console.log(currentDate.getTimezoneOffset());
