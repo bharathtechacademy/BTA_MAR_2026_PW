@@ -1,0 +1,340 @@
+{
+  "info": {
+    "_postman_id": "2d2bfb70-a596-442c-89fe-135ec681c4a7",
+    "name": "Github API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31694517"
+  },
+  "item": [
+    {
+      "name": "Create a duplicate repository for the authenticated user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//Verify status code\r",
+              "pm.test(\"Verify Status code\", function () {\r",
+              "    pm.expect(pm.response.code).to.eql(422);\r",
+              "})\r",
+              "\r",
+              "//Verify status message\r",
+              "pm.test(\"Verify Status message\", function () {\r",
+              "    pm.expect(pm.response.status).to.include(\"Unprocessable Entity\");\r",
+              "})\r",
+              "\r",
+              "//Verify Response time\r",
+              "pm.test(\"Verify Response time is less than 2000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})\r",
+              "\r",
+              "//Verify Reponse Body\r",
+              "pm.test(\"Verify Response Body\", function () {\r",
+              "    let responseBody = pm.response.json();\r",
+              "    pm.expect(responseBody.message).to.eql(\"Repository creation failed.\");\r",
+              "    pm.expect(responseBody.errors[0].message).to.eql(\"name already exists on this account\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\" : \"JMeterRepo2\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/user/repos",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "user",
+            "repos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create a valid repository for the authenticated user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.globals.set(\"RepoName\",\"JmeterRepo3\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//Verify status code\r",
+              "pm.test(\"Verify Status code\", function () {\r",
+              "    pm.expect(pm.response.code).to.eql(201);\r",
+              "})\r",
+              "\r",
+              "//Verify status message\r",
+              "pm.test(\"Verify Status message\", function () {\r",
+              "    pm.expect(pm.response.status).to.include(\"Created\");\r",
+              "})\r",
+              "\r",
+              "//Verify Response time\r",
+              "pm.test(\"Verify Response time is less than 2000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})\r",
+              "\r",
+              "//Verify Reponse Body\r",
+              "pm.test(\"Verify Response Body\", function () {\r",
+              "    let responseBody = pm.response.json();\r",
+              "    pm.expect(responseBody.name).to.eql(pm.globals.get(\"RepoName\"));\r",
+              "    pm.expect(responseBody.owner.login).to.eql(\"bharathtechacademy05\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\" : \"{{RepoName}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/user/repos",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "user",
+            "repos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get a repository with valid user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//Verify status code\r",
+              "pm.test(\"Verify Status code\", function () {\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "//Verify status message\r",
+              "pm.test(\"Verify Status message\", function () {\r",
+              "    pm.expect(pm.response.status).to.include(\"OK\");\r",
+              "})\r",
+              "\r",
+              "//Verify Response time\r",
+              "pm.test(\"Verify Response time is less than 2000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})\r",
+              "\r",
+              "//Verify Reponse Body\r",
+              "pm.test(\"Verify Response Body\", function () {\r",
+              "    let responseBody = pm.response.json();\r",
+              "    pm.expect(responseBody.name).to.eql(pm.globals.get(\"RepoName\"));\r",
+              "    pm.expect(responseBody.owner.login).to.eql(\"bharathtechacademy05\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/repos/{{OWNER}}/{{RepoName}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "repos",
+            "{{OWNER}}",
+            "{{RepoName}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update a repository with valid user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//Verify status code\r",
+              "pm.test(\"Verify Status code\", function () {\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "//Verify status message\r",
+              "pm.test(\"Verify Status message\", function () {\r",
+              "    pm.expect(pm.response.status).to.include(\"OK\");\r",
+              "})\r",
+              "\r",
+              "//Verify Response time\r",
+              "pm.test(\"Verify Response time is less than 2000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})\r",
+              "\r",
+              "//Verify Reponse Body\r",
+              "pm.test(\"Verify Response Body\", function () {\r",
+              "    let responseBody = pm.response.json();\r",
+              "    pm.expect(responseBody.private).to.eql(true);\r",
+              "    pm.expect(responseBody.owner.login).to.eql(\"bharathtechacademy05\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"private\":true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/repos/{{OWNER}}/{{RepoName}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "repos",
+            "{{OWNER}}",
+            "{{RepoName}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete a repository with valid user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//Verify status code\r",
+              "pm.test(\"Verify Status code\", function () {\r",
+              "    pm.expect(pm.response.code).to.eql(204);\r",
+              "})\r",
+              "\r",
+              "//Verify status message\r",
+              "pm.test(\"Verify Status message\", function () {\r",
+              "    pm.expect(pm.response.status).to.include(\"No Content\");\r",
+              "})\r",
+              "\r",
+              "//Verify Response time\r",
+              "pm.test(\"Verify Response time is less than 2000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/repos/{{OWNER}}/{{RepoName}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "repos",
+            "{{OWNER}}",
+            "{{RepoName}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

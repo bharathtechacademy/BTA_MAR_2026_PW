@@ -1,9 +1,9 @@
-import { test, expect, chromium } from '@playwright/test';
+import { test, expect, chromium, firefox } from '@playwright/test';
 
 test('Browser Actions Test', async ({  }) => {
 
-    //Launch the Chrome browser engine. 
-    const browserEngine = await chromium.launch({headless:false});//{channel:'msedge'}
+    //Launch the Firefox browser engine. 
+    const browserEngine = await firefox.launch({headless:false});//{channel:'msedge'}
 
     //Launch the browser context within the browser engine. 
     const browserContext = await browserEngine.newContext();
