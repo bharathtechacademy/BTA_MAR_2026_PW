@@ -68,8 +68,8 @@ export class LoginPageSteps {
     }
 
     //Method to verify error message displayed when user login with invalid credentials 
-    async verifyErrorMessageForInvalidCredentials(expectedErrorMsg: string) {
+    async verifyErrorMessageForInvalidCredentials() {
         await this.web.isElementVisible(loginPage.loginErrorMessage);
-    }
+    }    
 
 }

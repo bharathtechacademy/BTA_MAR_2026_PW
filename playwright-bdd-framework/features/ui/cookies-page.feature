@@ -6,6 +6,7 @@ Feature: Cookies feature in the CREATIO CRM application.
         Given Launch the creatio crm application
         Then Verify cookies popup is displayed successfully
 
+    @smoke @sanity
     Scenario: Verify the cookies pop-up content.
         Given Launch the creatio crm application
         Then Verify cookies popup is displayed successfully
