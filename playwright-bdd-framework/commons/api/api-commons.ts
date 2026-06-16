@@ -37,8 +37,8 @@ export class APICommons {
             default:
                 throw new Error(`Unsupported request type: ${requestType}`);
         }
-        //wait for 2 sec
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        //wait for 3 sec
+        await new Promise(resolve => setTimeout(resolve, 3000));
         return this.response;
     }
 
