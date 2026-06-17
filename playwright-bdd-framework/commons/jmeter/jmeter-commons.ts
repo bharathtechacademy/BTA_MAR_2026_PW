@@ -26,7 +26,7 @@ export class JMeterCommons {
 
         //Update the Relative Path of JMeter Folder Structure. 
         const projectRoot = process.cwd(); //playwright-tdd-framework
-        const jmeterBasePath = `${projectRoot}/tests/load/jmeter`;
+        const jmeterBasePath = `${projectRoot}/step-definitions/load/jmeter`;
         const jmeterToolPath = `${jmeterBasePath}/bin/jmeter.bat`; 
         const testpalnPath = `${jmeterBasePath}/testplans/${testPlanPath}`;
 
