@@ -1,0 +1,16 @@
+{
+    "prime-number":{
+         "model": "llama3.2:1b",
+  "prompt": "Is 7 a prime number? Return only true or false.",
+  "stream": false,
+  "format": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "type": "boolean"
+      }
+    },
+    "required": ["result"]
+  }
+    }
+}
