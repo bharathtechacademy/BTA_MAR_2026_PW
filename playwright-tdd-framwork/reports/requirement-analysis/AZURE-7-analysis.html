@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requirement Analysis – Azure US #7</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #222; font-size: 14px; line-height: 1.6; }
+
+    /* ── Header ── */
+    .page-header {
+      background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+      color: #fff; padding: 28px 40px; display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .page-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .page-header .sub { font-size: 13px; opacity: .85; }
+    .header-meta { text-align: right; font-size: 12px; opacity: .85; line-height: 1.8; }
+
+    /* ── Layout ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+
+    /* ── Story Snapshot ── */
+    .snapshot-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+      background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    }
+    .snapshot-item label { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #666; display: block; margin-bottom: 3px; }
+    .snapshot-item .value { font-weight: 600; color: #0078d4; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block; border-radius: 12px; padding: 2px 10px; font-size: 12px; font-weight: 600;
+    }
+    .badge-new      { background: #e8f4fd; color: #0078d4; }
+    .badge-p2       { background: #fff3cd; color: #856404; }
+    .badge-high     { background: #fde8e8; color: #c0392b; }
+    .badge-auto     { background: #e6f9ed; color: #1a7a3c; }
+    .badge-sprint1  { background: #f0e6ff; color: #5c2d91; }
+
+    /* ── Section cards ── */
+    .card {
+      background: #fff; border-radius: 8px; padding: 22px 24px; margin-bottom: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .card h2 {
+      font-size: 16px; font-weight: 700; color: #0078d4; margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 2px solid #e0ecf8;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card h3 { font-size: 14px; font-weight: 700; color: #333; margin: 14px 0 6px; }
+
+    /* ── Lists ── */
+    ul.styled, ol.styled { padding-left: 22px; }
+    ul.styled li, ol.styled li { margin-bottom: 5px; }
+
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead { background: #0078d4; color: #fff; }
+    thead th { padding: 10px 12px; text-align: left; font-weight: 600; }
+    tbody tr:nth-child(even) { background: #f5f9ff; }
+    tbody td { padding: 9px 12px; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+
+    /* ── Priority labels ── */
+    .p0 { color: #c0392b; font-weight: 700; }
+    .p1 { color: #e67e22; font-weight: 700; }
+    .p2 { color: #2980b9; font-weight: 700; }
+
+    /* ── Risk / Assumption tags ── */
+    .tag { display: inline-block; border-radius: 4px; padding: 1px 7px; font-size: 11px; margin-right: 4px; }
+    .tag-risk    { background: #fde8e8; color: #c0392b; }
+    .tag-dep     { background: #e8f4fd; color: #0078d4; }
+    .tag-assume  { background: #e6f9ed; color: #1a7a3c; }
+
+    /* ── Effort summary ── */
+    .effort-summary {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;
+    }
+    .effort-box { border: 2px solid #0078d4; border-radius: 8px; padding: 14px; }
+    .effort-box h4 { color: #0078d4; margin-bottom: 8px; font-size: 13px; }
+    .effort-total { font-size: 20px; font-weight: 700; color: #0078d4; margin-top: 8px; }
+    .confidence { font-size: 12px; margin-top: 4px; }
+    .conf-medium { color: #e67e22; font-weight: 600; }
+    .conf-high   { color: #1a7a3c; font-weight: 600; }
+
+    /* ── Open questions ── */
+    .q-item { border-left: 4px solid #0078d4; padding: 8px 12px; margin-bottom: 10px; background: #f5f9ff; border-radius: 0 4px 4px 0; }
+    .q-item .q-id { font-size: 11px; color: #0078d4; font-weight: 700; }
+
+    /* ── TBD ── */
+    .tbd { color: #999; font-style: italic; }
+
+    /* ── Footer ── */
+    footer { text-align: center; font-size: 12px; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<div class="page-header">
+  <div>
+    <div class="sub">Azure DevOps · Creatio CRM · Sprint 1</div>
+    <h1>Requirement Analysis Report — User Story #7</h1>
+    <div class="sub">Design and Implement Cookies Consent with Different Options</div>
+  </div>
+  <div class="header-meta">
+    <div><strong>Tracker:</strong> Azure DevOps</div>
+    <div><strong>Project:</strong> Creatio CRM</div>
+    <div><strong>Epic:</strong> User Login Experience (#1)</div>
+    <div><strong>Generated:</strong> 2026-06-22</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════ STORY SNAPSHOT ═══════════════ -->
+  <div class="card">
+    <h2>📋 Story Snapshot</h2>
+    <div class="snapshot-grid">
+      <div class="snapshot-item">
+        <label>Work Item ID</label>
+        <div class="value">#7</div>
+      </div>
+      <div class="snapshot-item">
+        <label>Type</label>
+        <div class="value">User Story</div>
+      </div>
+      <div class="snapshot-item">
+        <label>State</label>
+        <div><span class="badge badge-new">New</span></div>
+      </div>
+      <div class="snapshot-item">
+        <label>Priority</label>
+        <div><span class="badge badge-p2">P2 – Medium</span></div>
+      </div>
+      <div class="snapshot-item">
+        <label>Risk</label>
+        <div><span class="badge badge-high">1 – High</span></div>
+      </div>
+      <div class="snapshot-item">
+        <label>Story Points</label>
+        <div class="value">3</div>
+      </div>
+      <div class="snapshot-item">
+        <label>Iteration</label>
+        <div><span class="badge badge-sprint1">Sprint 1</span></div>
+      </div>
+      <div class="snapshot-item">
+        <label>Tags</label>
+        <div class="value">Cookies</div>
+      </div>
+      <div class="snapshot-item">
+        <label>Automation Required</label>
+        <div><span class="badge badge-auto">Yes</span></div>
+      </div>
+      <div class="snapshot-item">
+        <label>Assigned To</label>
+        <div class="value">Bharath Tech Academy</div>
+      </div>
+      <div class="snapshot-item">
+        <label>Epic Parent</label>
+        <div class="value">User Login Experience (#1)</div>
+      </div>
+      <div class="snapshot-item">
+        <label>Application URL</label>
+        <div><a href="https://accounts.creatio.com/login/alm" target="_blank" style="color:#0078d4;">accounts.creatio.com/login/alm</a></div>
+      </div>
+    </div>
+
+    <!-- Related Tasks -->
+    <h3>Linked Tasks</h3>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Type</th><th>Title</th><th>State</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>#140</td><td>QA Task</td><td>QA Requirement Analysis</td><td>✅ Closed</td></tr>
+        <tr><td>#141</td><td>QA Task</td><td>QA Test Design &amp; Data Setup</td><td>🔵 Active</td></tr>
+        <tr><td>#142</td><td>QA Task</td><td>QA Test Execution</td><td>⚪ New</td></tr>
+        <tr><td>#143</td><td>QA Automation Task</td><td>QA Automation</td><td>⚪ New</td></tr>
+        <tr><td>#144</td><td>DEV Task</td><td>Code Development</td><td>⚪ New</td></tr>
+        <tr><td>#145</td><td>DEV Task</td><td>Unit Testing</td><td>⚪ New</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ 1. STORY OBJECTIVE ═══════════════ -->
+  <div class="card">
+    <h2>1. User Story Objective &amp; Detailed Interpretation</h2>
+
+    <h3>Original Story (As-a / I-want / So-that)</h3>
+    <p><em>As a user, while logging into the application, I should see a Cookies Consent banner at the bottom of the login page with necessary details and interactive controls.</em></p>
+
+    <h3>Interpretation</h3>
+    <p>The story requires the application to display a GDPR/privacy-compliant cookie consent popup on the Creatio CRM login page (<code>https://accounts.creatio.com/login/alm</code>). The banner must appear automatically when the page loads, present the consent message, offer granular control via toggle switches (Necessary, Preferences, Statistics, Marketing), allow the user to expand detail via a "Show details" hyperlink, and dismiss the banner through one of three action buttons: <strong>Allow all</strong>, <strong>Allow selection</strong>, or <strong>Deny</strong>.</p>
+
+    <h3>Key Behavioural Rules</h3>
+    <ul class="styled">
+      <li>The <strong>Necessary</strong> toggle must be permanently disabled (always-on) — users cannot opt out of essential cookies.</li>
+      <li>Preferences, Statistics, and Marketing toggles are user-configurable.</li>
+      <li>Clicking any of the three action buttons (<em>Allow all / Allow selection / Deny</em>) must close the consent popup.</li>
+      <li><em>Allow all</em> enables all toggles; <em>Deny</em> disables all optional toggles; <em>Allow selection</em> respects current toggle states.</li>
+      <li>The "Show details" hyperlink expands an additional details/about section within the banner.</li>
+      <li>The consent message text must match verbatim the content defined in the acceptance criteria.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════ 2. BUSINESS / TESTING GOALS ═══════════════ -->
+  <div class="card">
+    <h2>2. What We Are Trying to Achieve</h2>
+    <ul class="styled">
+      <li><strong>Regulatory compliance:</strong> Ensure the application meets GDPR/CCPA cookie consent requirements before users interact with any part of the application.</li>
+      <li><strong>User transparency:</strong> Give users clear, plain-language information about what cookies are collected and why.</li>
+      <li><strong>Granular user control:</strong> Allow users to selectively enable/disable non-essential cookie categories.</li>
+      <li><strong>UX integrity:</strong> The consent banner must not interfere with the primary login form — it should be positioned below the form and not block login actions.</li>
+      <li><strong>Persistence:</strong> Verify that the user's cookie preference is respected and not re-prompted unnecessarily on subsequent visits (TBD).</li>
+      <li><strong>Test automation readiness:</strong> The story has <em>Automation Required = True</em>, so page objects and automated tests must be built as part of delivery.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════ 3. TEST SCENARIOS ═══════════════ -->
+  <div class="card">
+    <h2>3. Test Scenarios</h2>
+    <table>
+      <thead>
+        <tr><th style="width:60px;">Priority</th><th style="width:55px;">ID</th><th>Scenario</th><th>Expected Result</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="p0">P0</span></td>
+          <td>TS-001</td>
+          <td>Cookie consent banner displays on login page load</td>
+          <td>Banner is visible at the bottom of the login page immediately on page load without any user interaction</td>
+        </tr>
+        <tr>
+          <td><span class="p0">P0</span></td>
+          <td>TS-002</td>
+          <td>Consent message text is correct and complete</td>
+          <td>Banner displays the exact heading "This website uses cookies" and the prescribed body text about cookies usage and sharing</td>
+        </tr>
+        <tr>
+          <td><span class="p0">P0</span></td>
+          <td>TS-003</td>
+          <td>"Necessary" toggle is present and disabled (locked ON)</td>
+          <td>Necessary switch is visible, pre-toggled ON, and is not clickable / greyed out so user cannot disable it</td>
+        </tr>
+        <tr>
+          <td><span class="p0">P0</span></td>
+          <td>TS-004</td>
+          <td>"Allow all" button closes the banner and enables all toggles</td>
+          <td>Clicking "Allow all" dismisses the popup; all cookie categories are enabled</td>
+        </tr>
+        <tr>
+          <td><span class="p0">P0</span></td>
+          <td>TS-005</td>
+          <td>"Deny" button closes the banner and disables all optional toggles</td>
+          <td>Clicking "Deny" dismisses the popup; Preferences, Statistics, and Marketing cookies are disabled</td>
+        </tr>
+        <tr>
+          <td><span class="p0">P0</span></td>
+          <td>TS-006</td>
+          <td>"Allow selection" button closes the banner respecting current selections</td>
+          <td>Clicking "Allow selection" dismisses the popup; only the toggles that were ON by user are recorded as accepted</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-007</td>
+          <td>Four toggle switches are displayed: Necessary, Preferences, Statistics, Marketing</td>
+          <td>All four toggles are visible and labelled correctly in the banner</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-008</td>
+          <td>Preferences toggle can be enabled and disabled by the user</td>
+          <td>Clicking the Preferences toggle changes its state; state persists while banner is open</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-009</td>
+          <td>Statistics toggle can be enabled and disabled by the user</td>
+          <td>Same as TS-008 for Statistics</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-010</td>
+          <td>Marketing toggle can be enabled and disabled by the user</td>
+          <td>Same as TS-008 for Marketing</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-011</td>
+          <td>"Show details" hyperlink is present and expands the banner</td>
+          <td>Clicking "Show details" expands an additional detail/about section within the banner; the link may change to "Hide details"</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-012</td>
+          <td>Banner does not block the login form inputs or login button</td>
+          <td>User can still type in username/password and click Login while the banner is displayed</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-013</td>
+          <td>Banner position — displayed below login form</td>
+          <td>Banner is anchored at the bottom of the viewport / below the login form, not overlaying form fields</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-014</td>
+          <td>Allow selection with only Preferences enabled</td>
+          <td>Enable only Preferences, click Allow selection — only Preferences cookies accepted; Statistics and Marketing rejected</td>
+        </tr>
+        <tr>
+          <td><span class="p1">P1</span></td>
+          <td>TS-015</td>
+          <td>Allow selection with all optional toggles enabled</td>
+          <td>Enable all optional toggles, click Allow selection — result is equivalent to Allow all</td>
+        </tr>
+        <tr>
+          <td><span class="p2">P2</span></td>
+          <td>TS-016</td>
+          <td>Cookie consent banner is not shown after user has already accepted (session/cookie persistence)</td>
+          <td>Upon returning to the login page in same or subsequent session, banner does not reappear if consent was already given — <span class="tbd">TBD pending BA clarification</span></td>
+        </tr>
+        <tr>
+          <td><span class="p2">P2</span></td>
+          <td>TS-017</td>
+          <td>Banner displays correctly on different browsers (Chrome, Firefox, Edge, Safari)</td>
+          <td>UI is consistent and functional across all supported browsers</td>
+        </tr>
+        <tr>
+          <td><span class="p2">P2</span></td>
+          <td>TS-018</td>
+          <td>Banner is responsive on mobile screen sizes</td>
+          <td>Banner text is readable, toggles are tappable, buttons are accessible on small screens — <span class="tbd">TBD if mobile is in scope</span></td>
+        </tr>
+        <tr>
+          <td><span class="p2">P2</span></td>
+          <td>TS-019</td>
+          <td>Banner accessibility — keyboard navigation and screen reader</td>
+          <td>All interactive elements in the banner (toggles, buttons, links) are reachable via keyboard Tab/Enter; ARIA labels are present</td>
+        </tr>
+        <tr>
+          <td><span class="p2">P2</span></td>
+          <td>TS-020</td>
+          <td>Consent text contains correct "About" tab reference</td>
+          <td>The message references 'see more details on the "About" tab' and the About section is accessible via Show details</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ 4. QUESTIONS FOR PO ═══════════════ -->
+  <div class="card">
+    <h2>4. Questions for Product Owner</h2>
+
+    <div class="q-item">
+      <div class="q-id">Q1 – Consent Persistence</div>
+      <p>Once a user accepts or denies cookies, should the banner be suppressed on subsequent visits to the login page within the same browser/session? If yes, what is the persistence mechanism — local storage, a cookie, or backend preference?</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q2 – Default Toggle States</div>
+      <p>When the banner first appears, are Preferences, Statistics, and Marketing toggles in ON or OFF state by default?</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q3 – "Show Details" Content</div>
+      <p>What content should appear in the expanded "About" or "Show details" section? Is there a design mock or content specification for that section?</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q4 – Mobile / Responsive Scope</div>
+      <p>Is the cookie banner required to be functional on mobile/tablet viewports for Sprint 1, or is desktop-only sufficient?</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q5 – Consent Logging</div>
+      <p>Should the user's cookie preference be logged/stored on the backend (e.g., for audit trail)? If yes, what is the API endpoint or data schema?</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q6 – Banner Re-display on Preference Change</div>
+      <p>If a user previously denied cookies and visits again, can they change their preference? Is there a mechanism (e.g., "Manage cookies" link) to re-open the banner?</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q7 – Browser Support Matrix</div>
+      <p>What is the official supported browser and OS matrix for this application? This determines the cross-browser testing scope.</p>
+    </div>
+    <div class="q-item">
+      <div class="q-id">Q8 – DEV Tasks Status</div>
+      <p>Tasks #144 (Code Development) and #145 (Unit Testing) are still "New". What is the expected DEV completion date so QA execution (#142) can be planned accordingly?</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 5. RISKS ═══════════════ -->
+  <div class="card">
+    <h2>5. Risks</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Risk</th><th>Impact</th><th>Likelihood</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>R1</td>
+          <td><span class="tag tag-risk">High</span> Development not started (Risk level is flagged "1 – High" in Azure)</td>
+          <td>QA blocked on execution</td>
+          <td>High</td>
+          <td>Track DEV tasks #144/#145; sync daily in Sprint 1</td>
+        </tr>
+        <tr>
+          <td>R2</td>
+          <td><span class="tag tag-risk">High</span> No confirmation on consent persistence behaviour</td>
+          <td>Test coverage gap; defects found late</td>
+          <td>Medium</td>
+          <td>Raise Q1 with PO; add explicit AC in this sprint</td>
+        </tr>
+        <tr>
+          <td>R3</td>
+          <td><span class="tag tag-risk">Medium</span> "Necessary" toggle disabled state may vary by browser</td>
+          <td>Cross-browser failures for the locked toggle</td>
+          <td>Low</td>
+          <td>Test disabled state across browsers in TS-017</td>
+        </tr>
+        <tr>
+          <td>R4</td>
+          <td><span class="tag tag-risk">Medium</span> Third-party cookie consent library may be used</td>
+          <td>Automation selectors may be non-standard / iframed</td>
+          <td>Medium</td>
+          <td>Verify DOM structure early; adjust Playwright locators</td>
+        </tr>
+        <tr>
+          <td>R5</td>
+          <td><span class="tag tag-risk">Medium</span> Acceptance criteria lacks visual design specification</td>
+          <td>Layout/position defects may be disputed</td>
+          <td>Medium</td>
+          <td>Obtain UI design mockup or Figma link from PO</td>
+        </tr>
+        <tr>
+          <td>R6</td>
+          <td><span class="tag tag-risk">Low</span> GDPR compliance interpretation differs by region</td>
+          <td>Legal or regulatory non-compliance</td>
+          <td>Low</td>
+          <td>Confirm compliance scope with legal/PO; out of QA scope unless explicitly stated</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ 6. ASSUMPTIONS ═══════════════ -->
+  <div class="card">
+    <h2>6. Assumptions</h2>
+    <ul class="styled">
+      <li><span class="tag tag-assume">Assumed</span> The cookie consent banner is a front-end component rendered on the login page (not an external third-party widget loaded from a separate domain/iframe).</li>
+      <li><span class="tag tag-assume">Assumed</span> Default state of optional toggles (Preferences, Statistics, Marketing) when banner first appears is <strong>OFF</strong>.</li>
+      <li><span class="tag tag-assume">Assumed</span> Desktop browsers (Chrome, Firefox, Edge) are the primary test scope for Sprint 1; mobile is lower priority.</li>
+      <li><span class="tag tag-assume">Assumed</span> The banner appears on every fresh page load (no session-based suppression) unless PO confirms otherwise (Q1).</li>
+      <li><span class="tag tag-assume">Assumed</span> The exact body text of the consent message is finalized as specified in the acceptance criteria; no further content changes are expected.</li>
+      <li><span class="tag tag-assume">Assumed</span> Clicking any action button (Allow all / Allow selection / Deny) is sufficient to close the banner — no redirect or page reload occurs.</li>
+      <li><span class="tag tag-assume">Assumed</span> The test environment (<code>https://accounts.creatio.com/login/alm</code>) is stable and accessible for QA throughout Sprint 1.</li>
+      <li><span class="tag tag-assume">Assumed</span> Playwright automation will use the existing framework structure in this workspace (TypeScript, POM, page-steps pattern).</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════ 7. DEPENDENCIES ═══════════════ -->
+  <div class="card">
+    <h2>7. Dependencies</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Dependency</th><th>Type</th><th>Owned By</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>D1</td>
+          <td>DEV Task #144 – Code Development must be completed before QA execution (#142)</td>
+          <td><span class="tag tag-dep">DEV</span></td>
+          <td>Development Team</td>
+          <td>⚪ New</td>
+        </tr>
+        <tr>
+          <td>D2</td>
+          <td>DEV Task #145 – Unit Testing should pass before handing off to QA</td>
+          <td><span class="tag tag-dep">DEV</span></td>
+          <td>Development Team</td>
+          <td>⚪ New</td>
+        </tr>
+        <tr>
+          <td>D3</td>
+          <td>Login Page (#1 Epic / login flow) must be stable for cookie banner tests to be valid</td>
+          <td><span class="tag tag-dep">Feature</span></td>
+          <td>Dev / QA</td>
+          <td>Assumed stable</td>
+        </tr>
+        <tr>
+          <td>D4</td>
+          <td>Test environment <code>accounts.creatio.com/login/alm</code> must be accessible</td>
+          <td><span class="tag tag-dep">Infra</span></td>
+          <td>DevOps / Infra</td>
+          <td><span class="tbd">TBD</span></td>
+        </tr>
+        <tr>
+          <td>D5</td>
+          <td>UI design mockup / Figma spec for the cookie banner layout</td>
+          <td><span class="tag tag-dep">Design</span></td>
+          <td>Product / UX</td>
+          <td><span class="tbd">Not provided</span></td>
+        </tr>
+        <tr>
+          <td>D6</td>
+          <td>QA Test Design &amp; Data Setup (#141) must be completed before execution (#142)</td>
+          <td><span class="tag tag-dep">QA</span></td>
+          <td>QA Team</td>
+          <td>🔵 Active</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ 8. MANUAL TESTING EFFORT ═══════════════ -->
+  <div class="card">
+    <h2>8. Manual Functional Testing Effort Estimate</h2>
+    <table>
+      <thead>
+        <tr><th>Activity</th><th>T-Shirt Size</th><th>Hours (Low–High)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Requirement Analysis &amp; Test Planning</td><td>S</td><td>1 – 2 h</td></tr>
+        <tr><td>Test Case Design (20 scenarios)</td><td>M</td><td>3 – 4 h</td></tr>
+        <tr><td>Test Data &amp; Environment Setup</td><td>XS</td><td>0.5 – 1 h</td></tr>
+        <tr><td>Test Execution (functional + cross-browser)</td><td>M</td><td>4 – 6 h</td></tr>
+        <tr><td>Defect Logging &amp; Re-testing</td><td>S</td><td>1 – 2 h</td></tr>
+        <tr><td>Review &amp; Sign-off</td><td>XS</td><td>0.5 – 1 h</td></tr>
+        <tr style="background:#e8f4fd; font-weight:700;"><td>Total Manual Effort</td><td>M</td><td><strong>10 – 16 hours</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="confidence" style="margin-top:10px;">Confidence: <span class="conf-medium">Medium</span> — pending design mockup and confirmation of browser scope &amp; persistence behaviour.</div>
+  </div>
+
+  <!-- ═══════════════ 9. PLAYWRIGHT AUTOMATION EFFORT ═══════════════ -->
+  <div class="card">
+    <h2>9. Playwright Automation Effort Estimate</h2>
+    <table>
+      <thead>
+        <tr><th>Activity</th><th>T-Shirt Size</th><th>Hours (Low–High)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Framework setup / page object for Cookies Banner</td><td>S</td><td>2 – 3 h</td></tr>
+        <tr><td>Page steps for cookies interactions</td><td>S</td><td>1 – 2 h</td></tr>
+        <tr><td>Test data (JSON / testdata setup)</td><td>XS</td><td>0.5 – 1 h</td></tr>
+        <tr><td>Automation scripts for P0 scenarios (TS-001 to TS-006)</td><td>M</td><td>4 – 6 h</td></tr>
+        <tr><td>Automation scripts for P1 scenarios (TS-007 to TS-015)</td><td>M</td><td>5 – 7 h</td></tr>
+        <tr><td>Cross-browser test configuration</td><td>S</td><td>1 – 2 h</td></tr>
+        <tr><td>Stabilization / flakiness handling</td><td>S</td><td>2 – 3 h</td></tr>
+        <tr><td>Review &amp; CI integration check</td><td>XS</td><td>0.5 – 1 h</td></tr>
+        <tr style="background:#e8f4fd; font-weight:700;"><td>Total Automation Effort</td><td>L</td><td><strong>16 – 25 hours</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="effort-summary">
+      <div class="effort-box">
+        <h4>Manual Testing</h4>
+        <ul class="styled" style="font-size:13px;">
+          <li>20 functional test scenarios</li>
+          <li>3 browser configurations (Chrome, Firefox, Edge)</li>
+          <li>Exploratory testing session included</li>
+        </ul>
+        <div class="effort-total">10 – 16 hrs</div>
+        <div class="confidence">Confidence: <span class="conf-medium">Medium</span></div>
+      </div>
+      <div class="effort-box">
+        <h4>Playwright Automation</h4>
+        <ul class="styled" style="font-size:13px;">
+          <li>~15 automated test cases (P0 + P1)</li>
+          <li>New cookies-page-elements.json &amp; page steps</li>
+          <li>Cross-browser via playwright.config.ts</li>
+        </ul>
+        <div class="effort-total">16 – 25 hrs</div>
+        <div class="confidence">Confidence: <span class="conf-medium">Medium</span> — selector complexity unknown until DEV delivers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ TRACEABILITY TABLE ═══════════════ -->
+  <div class="card">
+    <h2>📎 Acceptance Criteria → Scenario Traceability</h2>
+    <table>
+      <thead>
+        <tr><th>Acceptance Criterion</th><th>Mapped Scenarios</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Banner appears at bottom of login page on page load</td>
+          <td>TS-001, TS-013</td>
+        </tr>
+        <tr>
+          <td>Consent message displays "This website uses cookies" + body text</td>
+          <td>TS-002, TS-020</td>
+        </tr>
+        <tr>
+          <td>Necessary toggle is displayed and disabled</td>
+          <td>TS-003, TS-007</td>
+        </tr>
+        <tr>
+          <td>Preferences, Statistics, Marketing toggles are displayed</td>
+          <td>TS-007, TS-008, TS-009, TS-010</td>
+        </tr>
+        <tr>
+          <td>"Show details" hyperlink expands cookie information</td>
+          <td>TS-011</td>
+        </tr>
+        <tr>
+          <td>"Allow all" button closes popup</td>
+          <td>TS-004</td>
+        </tr>
+        <tr>
+          <td>"Allow selection" button closes popup with user selections</td>
+          <td>TS-006, TS-014, TS-015</td>
+        </tr>
+        <tr>
+          <td>"Deny" button closes popup</td>
+          <td>TS-005</td>
+        </tr>
+        <tr>
+          <td>Banner does not block login form</td>
+          <td>TS-012</td>
+        </tr>
+        <tr>
+          <td>Cross-browser &amp; responsive behaviour</td>
+          <td>TS-017, TS-018, TS-019</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ OPEN QUESTIONS LOG ═══════════════ -->
+  <div class="card">
+    <h2>💬 Open Questions &amp; Decision Log</h2>
+    <table>
+      <thead>
+        <tr><th>Ref</th><th>Question</th><th>Raised By</th><th>Date</th><th>Status</th><th>Decision</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1</td><td>Consent persistence across sessions</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q2</td><td>Default toggle states when banner opens</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q3</td><td>Content for "Show details / About" section</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q4</td><td>Mobile / responsive scope in Sprint 1</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q5</td><td>Backend consent logging requirement</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q6</td><td>Mechanism to re-open banner after initial choice</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q7</td><td>Official browser/OS support matrix</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+        <tr><td>Q8</td><td>DEV completion date for tasks #144 / #145</td><td>QA</td><td>2026-06-22</td><td>🔴 Open</td><td class="tbd">TBD</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>Generated by QA Analyst Agent · Azure DevOps Project: Creatio CRM · User Story #7 · 2026-06-22</p>
+  <p style="margin-top:4px;">Secrets are not included in this report. All data retrieved via Azure DevOps REST API v7.0.</p>
+</footer>
+
+</body>
+</html>

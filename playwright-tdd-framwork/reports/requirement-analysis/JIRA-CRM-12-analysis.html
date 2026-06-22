@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirement Analysis: CRM-12</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            border-bottom: 4px solid #0052CC;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #0052CC;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .meta-info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        .meta-item {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #0052CC;
+        }
+        .meta-label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .meta-value {
+            color: #0052CC;
+            font-weight: 500;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-header {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 4px 4px 0 0;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .section-content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 4px 4px;
+            border: 1px solid #e1e4e8;
+        }
+        .subsection {
+            margin-bottom: 20px;
+        }
+        .subsection-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #0052CC;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .scenario {
+            background-color: white;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .scenario-priority {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .p0 { background-color: #ff6b6b; color: white; }
+        .p1 { background-color: #ffa94d; color: white; }
+        .p2 { background-color: #74b9ff; color: white; }
+        .risk {
+            background-color: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .assumption {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .dependency {
+            background-color: #f0f7ff;
+            border-left: 4px solid #0052CC;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .question {
+            background-color: #f5e6ff;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: white;
+        }
+        th {
+            background-color: #0052CC;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+        .effort-range {
+            font-weight: bold;
+            color: #0052CC;
+        }
+        .confidence {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .high { background-color: #d4edda; color: #155724; }
+        .medium { background-color: #fff3cd; color: #856404; }
+        .low { background-color: #f8d7da; color: #721c24; }
+        .acceptance-criteria-box {
+            background-color: #e3f2fd;
+            border: 2px solid #0052CC;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .tbd {
+            background-color: #fff9e6;
+            color: #ff6600;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-style: italic;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e1e4e8;
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Requirement Analysis Report</h1>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <span class="meta-label">Story ID</span>
+                    <span class="meta-value">CRM-12</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tracker</span>
+                    <span class="meta-value">JIRA</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Project</span>
+                    <span class="meta-value">Creatio CRM</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Generated</span>
+                    <span class="meta-value">2026-06-22 22:45 UTC</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Snapshot -->
+        <div class="section">
+            <div class="section-header">📸 Story Snapshot</div>
+            <div class="section-content">
+                <table>
+                    <tr>
+                        <th style="width: 25%;">Field</th>
+                        <th style="width: 75%;">Value</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Title</strong></td>
+                        <td>Login Form Validations for basic Login with user credentials</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td><span style="background-color: #e3f2fd; color: #0052CC; padding: 4px 8px; border-radius: 3px; font-weight: bold;">To Do</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Priority</strong></td>
+                        <td><span style="background-color: #fff9e6; color: #ff6600; padding: 4px 8px; border-radius: 3px; font-weight: bold;">Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Story Points</strong></td>
+                        <td><strong>3</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sprint</strong></td>
+                        <td>CRM Sprint 1 (Active: 2026-06-08 to 2026-06-21)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parent Epic</strong></td>
+                        <td>CRM-1: User Login Experience</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Owner</strong></td>
+                        <td><span class="tbd">Unassigned</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Created</strong></td>
+                        <td>2026-06-08 by Bharath Tech Academy</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Narrative & Acceptance Criteria -->
+        <div class="section">
+            <div class="section-header">📖 Narrative & Acceptance Criteria</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">User Story Narrative</div>
+                    <p style="margin-bottom: 15px;">
+                        <strong>As</strong> an existing user<br>
+                        <strong>When</strong> I log in to my Creatio CRM account<br>
+                        <strong>I want to</strong> use my business email and password through a secure and well-designed form<br>
+                        <strong>So that</strong> I can access my account and see errors when I enter invalid credentials
+                    </p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Context</div>
+                    <p>This issue is focused on implementing basic form-level validations for the login form in Creatio CRM, ensuring that user input is properly validated both on the client side and communicated clearly through error messages.</p>
+                </div>
+
+                <div class="acceptance-criteria-box">
+                    <div class="subsection-title" style="border: none; color: #1565c0;">✓ Acceptance Criteria</div>
+                    <ol>
+                        <li><strong>Email Format Validation:</strong> The Business Email field should be highlighted in red and show the error <code>'Invalid email format'</code> when the user enters an invalid email format and domain names.</li>
+                        <li><strong>Email Length Validation:</strong> The Business Email field should be highlighted in red and show the error <code>'Invalid email format'</code> when the user enters an email with more than 400 characters.</li>
+                        <li><strong>Password Length Validation:</strong> The Password field should be highlighted in red and show the error <code>'Invalid value. Value must contain up to 100 characters'</code> when the user enters a password with more than 100 characters.</li>
+                        <li><strong>Invalid Credentials Message:</strong> The error <code>'Invalid email or password'</code> should be displayed at the bottom of the page when the user enters an invalid username/password and tries to log in.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Objective & Interpretation -->
+        <div class="section">
+            <div class="section-header">🎯 Story Objective & Detailed Interpretation</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">High-Level Objective</div>
+                    <p>Implement client-side and server-side validation for the login form to ensure data integrity, improve user experience through immediate feedback, and enhance security by preventing invalid authentication attempts.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Detailed Interpretation</div>
+                    <ul>
+                        <li><strong>Client-Side Validation:</strong> Real-time validation as users type to provide immediate visual feedback (red highlighting and error messages)</li>
+                        <li><strong>Input Boundaries:</strong> Enforce strict character limits (400 chars for email, 100 chars for password)</li>
+                        <li><strong>Email Validation:</strong> Validate email format including proper domain structure (RFC 5322 compliant)</li>
+                        <li><strong>User Experience:</strong> Display clear, actionable error messages that guide users to correct their input</li>
+                        <li><strong>Security Posture:</strong> Generic error message "Invalid email or password" for failed authentication attempts (prevents email enumeration attacks)</li>
+                        <li><strong>Form State Management:</strong> Error states persist until corrected, ensuring user awareness</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business & Testing Goals -->
+        <div class="section">
+            <div class="section-header">💼 What We Are Trying to Achieve</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">Business Goals</div>
+                    <ul>
+                        <li><strong>Improve User Experience:</strong> Reduce friction in the login process by providing clear guidance on input requirements</li>
+                        <li><strong>Reduce Support Burden:</strong> Minimize support tickets related to login issues by preventing invalid submissions</li>
+                        <li><strong>Enhance Security:</strong> Implement defense-in-depth with both client and server validation</li>
+                        <li><strong>Ensure Data Quality:</strong> Guarantee that only valid email addresses and properly formatted credentials enter the system</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Testing Goals</div>
+                    <ul>
+                        <li><strong>Validation Coverage:</strong> Ensure all validation rules are implemented correctly</li>
+                        <li><strong>Error Messaging:</strong> Verify error messages are accurate, helpful, and properly positioned</li>
+                        <li><strong>Cross-Browser Compatibility:</strong> Test on Edge, Chrome, and Firefox</li>
+                        <li><strong>Edge Cases:</strong> Cover boundary conditions (max lengths, special characters, unicode)</li>
+                        <li><strong>User Flow:</strong> Verify end-to-end login flow including error recovery</li>
+                        <li><strong>Security:</strong> Ensure no sensitive information is exposed in error messages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Scenarios -->
+        <div class="section">
+            <div class="section-header">🧪 Test Scenarios</div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px;"><strong>Total Scenarios:</strong> 15 | <strong>P0:</strong> 4 | <strong>P1:</strong> 6 | <strong>P2:</strong> 5</p>
+
+                <div class="subsection">
+                    <div class="subsection-title">Email Format Validation Scenarios</div>
+                    
+                    <div class="scenario">
+                        <span class="scenario-priority p0">P0 - Critical</span>
+                        <h4>✓ SC-001: Valid Email Format Accepted</h4>
+                        <p><strong>Steps:</strong> Enter valid email (e.g., user@example.com) in Business Email field</p>
+                        <p><strong>Expected Result:</strong> No error message; field accepted; proceed to password entry</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p0">P0 - Critical</span>
+                        <h4>✗ SC-002: Invalid Email Format - No Domain</h4>
+                        <p><strong>Steps:</strong> Enter "userexample.com" (missing @)</p>
+                        <p><strong>Expected Result:</strong> Field highlighted in red; error message "Invalid email format" displayed</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p0">P0 - Critical</span>
+                        <h4>✗ SC-003: Invalid Email Format - No Local Part</h4>
+                        <p><strong>Steps:</strong> Enter "@example.com"</p>
+                        <p><strong>Expected Result:</strong> Field highlighted in red; error message "Invalid email format" displayed</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p1">P1 - High</span>
+                        <h4>✗ SC-004: Invalid Email Format - Special Characters</h4>
+                        <p><strong>Steps:</strong> Enter "user@exam ple.com" (space in domain)</p>
+                        <p><strong>Expected Result:</strong> Field highlighted in red; error message "Invalid email format" displayed</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p1">P1 - High</span>
+                        <h4>✗ SC-005: Email Exceeds 400 Characters</h4>
+                        <p><strong>Steps:</strong> Enter email with 401+ characters (valid format but exceeds limit)</p>
+                        <p><strong>Expected Result:</strong> Field highlighted in red; error message "Invalid email format" displayed</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p2">P2 - Medium</span>
+                        <h4>✗ SC-006: Email at Boundary - 400 Characters</h4>
+                        <p><strong>Steps:</strong> Enter valid email exactly 400 characters long</p>
+                        <p><strong>Expected Result:</strong> No error message; field accepted</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Password Validation Scenarios</div>
+                    
+                    <div class="scenario">
+                        <span class="scenario-priority p0">P0 - Critical</span>
+                        <h4>✓ SC-007: Valid Password - Within Limits</h4>
+                        <p><strong>Steps:</strong> Enter valid password (e.g., "MyPass123") with ≤100 characters</p>
+                        <p><strong>Expected Result:</strong> No error message; field accepted</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p0">P0 - Critical</span>
+                        <h4>✗ SC-008: Password Exceeds 100 Characters</h4>
+                        <p><strong>Steps:</strong> Enter password with 101+ characters</p>
+                        <p><strong>Expected Result:</strong> Field highlighted in red; error message "Invalid value. Value must contain up to 100 characters" displayed</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p2">P2 - Medium</span>
+                        <h4>✗ SC-009: Password at Boundary - 100 Characters</h4>
+                        <p><strong>Steps:</strong> Enter password exactly 100 characters long</p>
+                        <p><strong>Expected Result:</strong> No error message; field accepted</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p2">P2 - Medium</span>
+                        <h4>✗ SC-010: Password with Special Characters</h4>
+                        <p><strong>Steps:</strong> Enter password with special characters (e.g., "P@ss!w0rd#123")</p>
+                        <p><strong>Expected Result:</strong> No error message if ≤100 chars; field accepted</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Authentication Error Scenarios</div>
+                    
+                    <div class="scenario">
+                        <span class="scenario-priority p0">P0 - Critical</span>
+                        <h4>✗ SC-011: Invalid Email/Password Combination</h4>
+                        <p><strong>Steps:</strong> Submit valid-format credentials that don't match any account</p>
+                        <p><strong>Expected Result:</strong> Error message "Invalid email or password" displayed at bottom of page</p>
+                        <p><strong>Note:</strong> Generic message prevents email enumeration attacks</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p1">P1 - High</span>
+                        <h4>✗ SC-012: Valid Email, Wrong Password</h4>
+                        <p><strong>Steps:</strong> Enter registered email with incorrect password</p>
+                        <p><strong>Expected Result:</strong> Error message "Invalid email or password" at bottom</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p1">P1 - High</span>
+                        <h4>✗ SC-013: Unregistered Email, Valid Format</h4>
+                        <p><strong>Steps:</strong> Enter unregistered email in valid format with any password</p>
+                        <p><strong>Expected Result:</strong> Error message "Invalid email or password" at bottom</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Cross-Browser Compatibility Scenarios</div>
+                    
+                    <div class="scenario">
+                        <span class="scenario-priority p2">P2 - Medium</span>
+                        <h4>✓ SC-014: Chrome Browser - All Validations</h4>
+                        <p><strong>Steps:</strong> Execute SC-001 through SC-013 on Chrome latest</p>
+                        <p><strong>Expected Result:</strong> All scenarios pass with consistent styling</p>
+                    </div>
+
+                    <div class="scenario">
+                        <span class="scenario-priority p2">P2 - Medium</span>
+                        <h4>✓ SC-015: Edge/Firefox Compatibility</h4>
+                        <p><strong>Steps:</strong> Execute critical scenarios on Edge and Firefox</p>
+                        <p><strong>Expected Result:</strong> All validations work consistently across browsers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PO Questions -->
+        <div class="section">
+            <div class="section-header">❓ Questions for Product Owner</div>
+            <div class="section-content">
+                <div class="question">
+                    <strong>Q1: Server-Side Validation Timing</strong><br>
+                    Should server-side validation occur immediately on blur, or only on form submission? Are there performance implications?
+                </div>
+
+                <div class="question">
+                    <strong>Q2: Password Masking & Visibility</strong><br>
+                    Should the password field support a "show/hide password" toggle button? Is this a requirement for this story?
+                </div>
+
+                <div class="question">
+                    <strong>Q3: Form Reset Behavior</strong><br>
+                    After an authentication error, should the password field be cleared automatically, or preserved for user retry?
+                </div>
+
+                <div class="question">
+                    <strong>Q4: Email Case Sensitivity</strong><br>
+                    Should email validation be case-insensitive (standard practice)? How should the system normalize emails?
+                </div>
+
+                <div class="question">
+                    <strong>Q5: International Email Support</strong><br>
+                    Should we support internationalized domain names (IDN) or Unicode characters in local part (RFC 6531)?
+                </div>
+
+                <div class="question">
+                    <strong>Q6: Rate Limiting & Security</strong><br>
+                    Should we implement rate limiting on failed login attempts to prevent brute-force attacks? (Out of scope for this story?)
+                </div>
+
+                <div class="question">
+                    <strong>Q7: Error Message Placement</strong><br>
+                    For the "Invalid email or password" error at page bottom—should it be an alert, toast notification, or inline message?
+                </div>
+
+                <div class="question">
+                    <strong>Q8: Accessibility Requirements</strong><br>
+                    Should error messages be announced to screen readers? Are there ARIA requirements (aria-live, aria-invalid)?
+                </div>
+            </div>
+        </div>
+
+        <!-- Risks -->
+        <div class="section">
+            <div class="section-header">⚠️ Risks Involved</div>
+            <div class="section-content">
+                <div class="risk">
+                    <strong>R1: Client-Side Validation Bypass</strong><br>
+                    Risk: Attackers can bypass client-side validation using developer tools. <br>
+                    Mitigation: Implement mandatory server-side validation; never trust client-side checks alone.
+                </div>
+
+                <div class="risk">
+                    <strong>R2: Email Enumeration Attack</strong><br>
+                    Risk: Distinct error messages for "user not found" vs. "wrong password" can leak registered email addresses. <br>
+                    Mitigation: Use generic error "Invalid email or password" as specified in acceptance criteria.
+                </div>
+
+                <div class="risk">
+                    <strong>R3: Performance Degradation</strong><br>
+                    Risk: Real-time validation on every keystroke could cause UI lag or excessive server calls. <br>
+                    Mitigation: Implement debouncing; consider local validation with periodic server sync.
+                </div>
+
+                <div class="risk">
+                    <strong>R4: Browser Compatibility Issues</strong><br>
+                    Risk: HTML5 validation attributes may render differently across Edge, Chrome, Firefox. <br>
+                    Mitigation: Test on all three browsers; use CSS to standardize visual feedback.
+                </div>
+
+                <div class="risk">
+                    <strong>R5: Accessibility Compliance</strong><br>
+                    Risk: Error messages not properly announced to screen readers (WCAG 2.1 Level AA). <br>
+                    Mitigation: Use ARIA attributes (aria-live="assertive", aria-invalid="true").
+                </div>
+
+                <div class="risk">
+                    <strong>R6: Boundary Testing Gaps</strong><br>
+                    Risk: Off-by-one errors at 100/400 character limits not caught in manual testing. <br>
+                    Mitigation: Automate boundary tests; test exactly at limits (99, 100, 101 chars).
+                </div>
+            </div>
+        </div>
+
+        <!-- Assumptions -->
+        <div class="section">
+            <div class="section-header">📌 Assumptions</div>
+            <div class="section-content">
+                <div class="assumption">
+                    <strong>A1: Login Endpoint Availability</strong><br>
+                    The backend authentication API endpoint is fully functional and returns appropriate status codes (200, 401, 400).
+                </div>
+
+                <div class="assumption">
+                    <strong>A2: Email Database Validation</strong><br>
+                    Database contains valid user records with email and password fields; backend can perform credential lookups.
+                </div>
+
+                <div class="assumption">
+                    <strong>A3: Form UI Framework</strong><br>
+                    The login form is built with a framework (React, Angular, Vue) that supports two-way binding and conditional rendering.
+                </div>
+
+                <div class="assumption">
+                    <strong>A4: Browser Standards Compliance</strong><br>
+                    Target browsers (Edge, Chrome, Firefox) support ES6+, CSS Grid/Flexbox, and modern DOM APIs.
+                </div>
+
+                <div class="assumption">
+                    <strong>A5: Test Environment Parity</strong><br>
+                    Test environment mirrors production in terms of authentication backend, network latency, and security policies.
+                </div>
+
+                <div class="assumption">
+                    <strong>A6: No Cookie/Session State Issues</strong><br>
+                    Third-party cookies are enabled; session management is configured correctly; no CORS restrictions.
+                </div>
+
+                <div class="assumption">
+                    <strong>A7: Regex Engine Availability</strong><br>
+                    Email regex validation engine is available; uses standard RFC 5322 compliant pattern.
+                </div>
+            </div>
+        </div>
+
+        <!-- Dependencies -->
+        <div class="section">
+            <div class="section-header">🔗 Dependencies</div>
+            <div class="section-content">
+                <div class="dependency">
+                    <strong>D1: Backend Authentication Service (BLOCKING)</strong><br>
+                    Must have stable API endpoint for login validation. Story depends on CRM-X (backend infrastructure).
+                </div>
+
+                <div class="dependency">
+                    <strong>D2: Login Page UI Component (BLOCKING)</strong><br>
+                    Form markup must exist with proper input IDs, labels, and error message containers.
+                </div>
+
+                <div class="dependency">
+                    <strong>D3: CSS Styling Framework (HIGH PRIORITY)</strong><br>
+                    Red highlighting and error message styles must be defined; color scheme consistency required.
+                </div>
+
+                <div class="dependency">
+                    <strong>D4: Test Data Setup (BLOCKING)</strong><br>
+                    Must have valid test users in staging environment for SC-011-SC-013 authentication tests.
+                </div>
+
+                <div class="dependency">
+                    <strong>D5: Accessibility Standards Documentation (MEDIUM)</strong><br>
+                    WCAG 2.1 compliance requirements must be documented; ARIA attribute guidelines needed.
+                </div>
+
+                <div class="dependency">
+                    <strong>D6: Security Review Approval (MEDIUM)</strong><br>
+                    Error messaging strategy must be approved by security team to prevent information leakage.
+                </div>
+
+                <div class="dependency">
+                    <strong>D7: Related Epic CRM-1 Alignment (HIGH)</strong><br>
+                    Must align with parent epic "User Login Experience" design patterns and UX guidelines.
+                </div>
+            </div>
+        </div>
+
+        <!-- Effort Estimation -->
+        <div class="section">
+            <div class="section-header">⏱️ Testing Effort Estimation</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">Manual Functional Testing Effort</div>
+                    <p style="margin-bottom: 15px;"><strong>T-Shirt Size:</strong> <span style="background-color: #fff9e6; color: #ff6600; padding: 4px 8px; border-radius: 3px; font-weight: bold;">Medium (M)</span></p>
+                    <p style="margin-bottom: 15px;"><strong>Time Range:</strong> <span class="effort-range">12-16 hours</span></p>
+                    
+                    <p><strong>Breakdown:</strong></p>
+                    <ul>
+                        <li><strong>Test Design & Planning:</strong> 2-3 hours
+                            <ul>
+                                <li>Requirement analysis and test scenario creation</li>
+                                <li>Test data preparation (valid/invalid emails, edge cases)</li>
+                                <li>Environment setup (test accounts, browser configurations)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Test Data & Environment Setup:</strong> 1-2 hours
+                            <ul>
+                                <li>Create 5-10 test users with various email formats</li>
+                                <li>Set up browser profiles (Chrome, Firefox, Edge)</li>
+                                <li>Configure test environment URLs and credentials</li>
+                            </ul>
+                        </li>
+                        <li><strong>Test Execution (Manual):</strong> 5-7 hours
+                            <ul>
+                                <li>Execute 15 test scenarios across 3 browsers (45 test runs)</li>
+                                <li>Average 7-10 minutes per scenario including documentation</li>
+                                <li>Cross-browser validation and issue logging</li>
+                            </ul>
+                        </li>
+                        <li><strong>Defect Logging & Reporting:</strong> 2-3 hours
+                            <ul>
+                                <li>Document failed scenarios with screenshots</li>
+                                <li>Create bug reports with detailed reproduction steps</li>
+                                <li>Generate test summary report and coverage metrics</li>
+                            </ul>
+                        </li>
+                        <li><strong>Retest & Sign-Off:</strong> 2-3 hours
+                            <ul>
+                                <li>Retest fixed defects</li>
+                                <li>Verify edge cases after fixes</li>
+                                <li>Final acceptance sign-off</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Confidence Level:</strong> <span class="confidence high">High</span></p>
+                    <p style="font-size: 0.9em; color: #666;"><strong>Estimation Drivers:</strong> Well-defined acceptance criteria, limited scope (form-only, no multi-step flows), established test data requirements.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Playwright Automation Effort</div>
+                    <p style="margin-bottom: 15px;"><strong>T-Shirt Size:</strong> <span style="background-color: #fff9e6; color: #ff6600; padding: 4px 8px; border-radius: 3px; font-weight: bold;">Medium-Large (M-L)</span></p>
+                    <p style="margin-bottom: 15px;"><strong>Time Range:</strong> <span class="effort-range">18-24 hours</span></p>
+
+                    <p><strong>Breakdown:</strong></p>
+                    <ul>
+                        <li><strong>Framework Setup & Configuration:</strong> 2-3 hours
+                            <ul>
+                                <li>Configure Playwright with BDD (Gherkin) support if needed</li>
+                                <li>Set up test environment configuration (base URL, timeouts)</li>
+                                <li>Configure browser launch options for Chrome, Firefox, Edge</li>
+                            </ul>
+                        </li>
+                        <li><strong>Page Object Model (POM) Development:</strong> 3-4 hours
+                            <ul>
+                                <li>Create LoginPage.ts with selectors for email, password, error fields</li>
+                                <li>Implement helper methods: fillEmail(), fillPassword(), submitForm(), getErrorMessage()</li>
+                                <li>Add wait strategies for dynamic error messages and validations</li>
+                            </ul>
+                        </li>
+                        <li><strong>Test Data Management:</strong> 1-2 hours
+                            <ul>
+                                <li>Create test data fixtures (valid/invalid emails, boundary values)</li>
+                                <li>Set up dynamic test user generation if needed</li>
+                                <li>Implement test data cleanup hooks</li>
+                            </ul>
+                        </li>
+                        <li><strong>Test Script Development:</strong> 7-10 hours
+                            <ul>
+                                <li>Implement 15 test scenarios (45-60 minutes each on average)</li>
+                                <li>Add assertions for error message visibility, field highlighting</li>
+                                <li>Implement screenshot capture on failures</li>
+                                <li>Add retry logic for flaky tests (timing issues)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Cross-Browser Testing:</strong> 2-3 hours
+                            <ul>
+                                <li>Execute test suite on Chrome, Firefox, Edge</li>
+                                <li>Debug browser-specific issues (event handling, CSS rendering)</li>
+                                <li>Handle browser-specific element visibility timing</li>
+                            </ul>
+                        </li>
+                        <li><strong>Stabilization & Flakiness Handling:</strong> 2-3 hours
+                            <ul>
+                                <li>Add explicit waits for dynamic elements</li>
+                                <li>Handle network latency in error response timing</li>
+                                <li>Implement robust selectors (not relying on text content)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Documentation & Maintenance:</strong> 1 hour
+                            <ul>
+                                <li>Document test structure and setup instructions</li>
+                                <li>Create troubleshooting guide for common failures</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Confidence Level:</strong> <span class="confidence medium">Medium</span></p>
+                    <p style="font-size: 0.9em; color: #666;"><strong>Estimation Drivers:</strong> Form validation testing is straightforward, but async error message handling may require retry logic. Cross-browser timing differences could add stabilization effort.</p>
+
+                    <p style="margin-top: 20px;"><strong>Automation ROI Notes:</strong></p>
+                    <ul>
+                        <li>High reusability: LoginPage object can be used for future login-related tests</li>
+                        <li>Critical path: This is a frequently-used form; automation provides good regression coverage</li>
+                        <li>Maintenance overhead: Low (form unlikely to change significantly)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Effort Comparison Table</div>
+                    <table>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Manual (Hours)</th>
+                            <th>Automation (Hours)</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td>Test Design</td>
+                            <td>2-3</td>
+                            <td>2-3</td>
+                            <td>Same for both</td>
+                        </tr>
+                        <tr>
+                            <td>Environment Setup</td>
+                            <td>1-2</td>
+                            <td>2-3</td>
+                            <td>Automation requires framework config</td>
+                        </tr>
+                        <tr>
+                            <td>Test Development</td>
+                            <td>5-7</td>
+                            <td>10-14</td>
+                            <td>Initial automation investment higher</td>
+                        </tr>
+                        <tr>
+                            <td>Execution</td>
+                            <td>2-3</td>
+                            <td>0.5 (autonomous)</td>
+                            <td>Automation runs unattended</td>
+                        </tr>
+                        <tr>
+                            <td>Defect Logging</td>
+                            <td>2-3</td>
+                            <td>1-2</td>
+                            <td>Automation logs structured reports</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>12-18</strong></td>
+                            <td><strong>18-25</strong></td>
+                            <td>Automation break-even at ~5 reruns</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traceability Matrix -->
+        <div class="section">
+            <div class="section-header">🗺️ Traceability Matrix</div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px;">This matrix maps acceptance criteria to test scenarios, ensuring comprehensive coverage.</p>
+                <table>
+                    <tr>
+                        <th>Acceptance Criteria</th>
+                        <th>Covering Scenarios</th>
+                        <th>Priority</th>
+                        <th>Risk Level</th>
+                    </tr>
+                    <tr>
+                        <td>AC1: Invalid email format → error 'Invalid email format'</td>
+                        <td>SC-002, SC-003, SC-004</td>
+                        <td>P0</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>AC2: Email > 400 chars → error 'Invalid email format'</td>
+                        <td>SC-005, SC-006</td>
+                        <td>P1</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>AC3: Password > 100 chars → error 'Value must contain up to 100 characters'</td>
+                        <td>SC-008, SC-009</td>
+                        <td>P0</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>AC4: Invalid credentials → error 'Invalid email or password' at bottom</td>
+                        <td>SC-011, SC-012, SC-013</td>
+                        <td>P0</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>General: Valid inputs accepted (positive path)</td>
+                        <td>SC-001, SC-007</td>
+                        <td>P0</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>General: Cross-browser compatibility (Edge, Chrome, Firefox)</td>
+                        <td>SC-014, SC-015</td>
+                        <td>P2</td>
+                        <td>Medium</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Open Questions & Decision Log -->
+        <div class="section">
+            <div class="section-header">📋 Decision Log & Action Items</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">Outstanding Decisions (TBD)</div>
+                    <ul>
+                        <li><span class="tbd">TBD-001:</span> Server-side validation timing (immediate vs. submit-time)</li>
+                        <li><span class="tbd">TBD-002:</span> Password visibility toggle required for this story?</li>
+                        <li><span class="tbd">TBD-003:</span> Support for internationalized email formats (IDN)?</li>
+                        <li><span class="tbd">TBD-004:</span> Rate limiting on failed attempts (this story or separate)?</li>
+                        <li><span class="tbd">TBD-005:</span> Accessibility requirements (WCAG level, ARIA attributes)?</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Recommended Next Steps</div>
+                    <ol>
+                        <li><strong>Schedule PO Clarification Meeting:</strong> Address questions Q1-Q8 before dev starts</li>
+                        <li><strong>Design Review:</strong> Confirm error message placement, styling, and timing with UX</li>
+                        <li><strong>Security Review:</strong> Validate error message strategy prevents information leakage</li>
+                        <li><strong>Dev Kickoff:</strong> Share this analysis with development team; clarify test data requirements</li>
+                        <li><strong>Test Automation Planning:</strong> Decide on Playwright vs. manual testing approach</li>
+                        <li><strong>Accessibility Audit:</strong> Pre-implementation WCAG compliance check</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <div class="section-header">📊 Analysis Summary</div>
+            <div class="section-content">
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Summary</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Story Complexity</strong></td>
+                        <td>Low-Medium: Single-form validation with 4 clear acceptance criteria</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Test Coverage</strong></td>
+                        <td>15 scenarios (P0: 4, P1: 6, P2: 5); boundary testing included</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Manual Testing Effort</strong></td>
+                        <td>12-16 hours; Medium (M)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automation Effort</strong></td>
+                        <td>18-24 hours; Medium-Large (M-L); High ROI for regression</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Risks</strong></td>
+                        <td>Client-side bypass, email enumeration, cross-browser compatibility, accessibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Critical Dependencies</strong></td>
+                        <td>Backend auth service, form UI component, test data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outstanding Items</strong></td>
+                        <td>5 TBD items; PO clarification needed on validation timing and accessibility</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                <strong>Report Generated:</strong> 2026-06-22 22:45 UTC<br>
+                <strong>Report Version:</strong> 1.0<br>
+                <strong>Confidence Level:</strong> High (based on complete acceptance criteria and clear requirements)<br>
+                <strong>Next Review:</strong> After PO clarification meeting
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+[    1787ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/index.htm:0
+[   19837ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/index.htm:0
+[   20214ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/admin.htm:0
+[   20557ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/index.htm:0
+[   20960ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/about.htm:0
+[   21570ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/services.htm:0
+[   22217ms] [LOG] LCP detected. Loading non-critical script... 220 @ https://www.parasoft.com/products/:180
+[   22262ms] [LOG] initHydration @ https://www.parasoft.com/products/:233
+[   22263ms] [LOG] qualified called @ https://www.parasoft.com/wp-content/themes/parasoftsite/react/dist/hydrate.bundle.js?v=1781633989:0
+[   22263ms] [LOG] qualified loaded @ https://www.parasoft.com/wp-content/themes/parasoftsite/react/dist/hydrate.bundle.js?v=1781633989:0
+[   22659ms] [LOG] initHydration @ https://www.parasoft.com/solutions/:233
+[   22659ms] [LOG] qualified called @ https://www.parasoft.com/wp-content/themes/parasoftsite/react/dist/hydrate.bundle.js?v=1781633989:0
+[   22659ms] [LOG] qualified loaded @ https://www.parasoft.com/wp-content/themes/parasoftsite/react/dist/hydrate.bundle.js?v=1781633989:0
+[   22674ms] [LOG] LCP detected. Loading non-critical script... 192 @ https://www.parasoft.com/solutions/:180
+[   23234ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/contact.htm:0
+[   23593ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/lookup.htm:0
+[   23953ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
+[   23953ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
+[   23953ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
+[   26665ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/news.htm#6:0
+[   27099ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/news.htm:0
+[   28915ms] [LOG] addon dependencies loaded 11 @ https://forums.parasoft.com/dist/v2/layouts/entries/layouts.CCBIG9T4.min.js:104
+[   29623ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/sitemap.htm:0
+[   30463ms] [WARNING] Specifying 'overflow: visible' on img, video and canvas tags may cause them to produce visual content outside of the element bounds. See https://github.com/WICG/view-transitions/blob/main/debugging_overflow_on_images.md for details. @ https://www.parasoft.com/:2319
+[   30524ms] [LOG] initHydration @ https://www.parasoft.com/:233
+[   30525ms] [LOG] qualified called @ https://www.parasoft.com/wp-content/themes/parasoftsite/react/dist/hydrate.bundle.js?v=1782124959:0
+[   30525ms] [LOG] qualified loaded @ https://www.parasoft.com/wp-content/themes/parasoftsite/react/dist/hydrate.bundle.js?v=1782124959:0
+[   30545ms] [LOG] LCP detected. Loading non-critical script... 134 @ https://www.parasoft.com/:180
+[   33800ms] Uncaught TypeError: Cannot read properties of undefined (reading 'closeLightbox')
+    at closeLightbox (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:335964)
+    at onEndLoadingState (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:332378)
+    at emit (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:51058)
+    at <anonymous> (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:282476)
+    at handleMessage (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:282140)
+    at onReceived (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:284064)
+    at <anonymous> (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:276355)
+    at notify (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:276320)
+    at message (https://js.qualified.com/qualified.js?token=toaWvavBpa9r2g42:6:274453)
+[   35605ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://aplo-evnt.com/api/v1/intent_pixel/track_request?app_id=67618fb78c9e1001b07f9378:0
+[  117747ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/index.htm:0
+[  118041ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/about.htm:0
+[  118332ms] [INFO] Loading the script 'https://parabank.parasoft.com/parabank/webjars/jquery/4.0.0/jquery.min.js' violates the following Content Security Policy directive: "script-src 'unsafe-inline' 'unsafe-eval'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken. @ https://parabank.parasoft.com/parabank/services.htm:0
+[  118621ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/services.htm:0
+[  119043ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/contact.htm:0
+[  119438ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/lookup.htm:0
+[  119758ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
+[  119758ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
+[  119758ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
+[  120064ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/news.htm:0
+[  120376ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/sitemap.htm:0
+[  120675ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/admin.htm:0
