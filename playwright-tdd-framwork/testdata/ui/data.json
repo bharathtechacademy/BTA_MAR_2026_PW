@@ -16,6 +16,28 @@
          "password":"Test@1234",
          "expectedErrorMsg":"Invalid email or password."
    },
+   "Verify invalid email format validation":{
+     "buttonName":"Allow All",
+        "invalidEmail":"user@domain",
+        "expectedErrorMsg":"Invalid email format"
+   },
+   "Verify excessive email length validation":{
+     "buttonName":"Allow All",
+        "emailLength":401,
+        "expectedErrorMsg":"Invalid email format"
+   },
+   "Verify excessive password length validation":{
+     "buttonName":"Allow All",
+        "username":"bharattechacademy5@outlook.com",
+        "passwordLength":101,
+        "expectedErrorMsg":"Invalid value. Value must contain up to 100 characters"
+   },
+   "Verify invalid credentials error message":{
+     "buttonName":"Allow All",
+        "username":"test@test.com",
+         "password":"Test@1234",
+         "expectedErrorMsg":"Invalid email or password"
+   },
    "Verify forgot password functionality":{
          "buttonName":"Allow All",
         "username":"bharattechacademy3@outlook.com"

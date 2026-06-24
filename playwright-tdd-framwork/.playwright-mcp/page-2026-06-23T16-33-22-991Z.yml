@@ -1,0 +1,32 @@
+- generic [ref=e2]:
+  - generic:
+    - generic:
+      - generic:
+        - main [ref=e4]:
+          - generic [ref=e9]:
+            - img "Microsoft" [ref=e11]
+            - generic [ref=e18]:
+              - generic "bharathtechacademy30@outlook.com" [ref=e20]:
+                - generic [ref=e21]: bharathtechacademy30@outlook.com
+              - status [ref=e22]:
+                - generic [ref=e23]:
+                  - heading "Verify your email" [level=1] [ref=e24]
+                  - generic [ref=e27]: We'll send a code to bh*****@gmail.com. To verify this is your email, enter it here.
+              - generic [ref=e31]:
+                - generic [ref=e32]: Email
+                - textbox "Email" [active] [ref=e33]:
+                  - /placeholder: ""
+              - button "Send code" [ref=e35]
+              - button "Already received a code?" [ref=e38] [cursor=pointer]
+              - button "Use your password" [ref=e41] [cursor=pointer]
+        - contentinfo [ref=e43]:
+          - generic [ref=e44]:
+            - button "Help" [ref=e45] [cursor=pointer]
+            - link "Terms of use" [ref=e46] [cursor=pointer]:
+              - /url: https://www.microsoft.com/servicesagreement/
+            - link "Privacy and cookies" [ref=e47] [cursor=pointer]:
+              - /url: https://privacy.microsoft.com/-
+          - generic [ref=e49]:
+            - text: Use private browsing if this is not your device.
+            - link "Learn more" [ref=e50] [cursor=pointer]:
+              - /url: https://go.microsoft.com/fwlink/?LinkID=2281649

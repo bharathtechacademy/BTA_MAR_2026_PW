@@ -1,0 +1,36 @@
+- generic [ref=e5]:
+  - img "Organization background image" [ref=e7]
+  - generic [ref=e8]:
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - img "Microsoft" [ref=e17]
+        - main [ref=e18]:
+          - generic [ref=e21]:
+            - heading "Sign in" [level=1] [ref=e25]
+            - generic [ref=e26]:
+              - alert
+              - generic [ref=e28]:
+                - textbox "Enter your email, phone, or Skype." [active] [ref=e29]:
+                  - /placeholder: Email, phone, or Skype
+                - textbox [ref=e30]
+            - generic [ref=e34]:
+              - generic [ref=e35]:
+                - text: No account?
+                - link "Create a Microsoft account" [ref=e36] [cursor=pointer]:
+                  - /url: https://login.live.com/oauth20_authorize.srf?scope=openid+profile+email+offline_access&response_type=code&client_id=51483342-085c-4d86-bf88-cf50c7252078&response_mode=form_post&redirect_uri=https%3a%2f%2flogin.microsoftonline.com%2fcommon%2ffederation%2foauth2msa&state=rQQIARAAnZIxaBNRAIbvkja2pdq0OBQnh14G7Uvu3r27exc4MI1N22CMtUW0S3h596659nLvvHtJbEHo4FC34thRKEigUNRBnJwcnDo7SBehdFGcCiJK6-RWXH744R--_-e_kdbyWnEK2XYTI0KBpkMNIGh5gBDNAtC0KDFty7BsXM0YqoYMFE-MZKdfTHYffrxW3np26-lz_eubXXm4Efhdlqe83ZdRS4goKRYKSZREMXepH2r5bpJESb7rJx0SJKLj-vwsXGgk_mrIXD98J8uHsnwsy_3UlGVq2IaQAmoaGCBdIwCrGAGkWi62dZ0ZTf1zaqxe6ogWPBMe-5vsR2rY43G7EfFE7KYPUjEjQdtxWTdPNjvxOVsuZlGw0RDcOUdU9JICKwqs_BNSYKXZIjERgtEWocRl7Q1dgZVyzIjwuQINqJbv1xRYaQiWiHsBCRMFVtgTRjuCKXolCki44Cr6bc2ECjSTji_YX6_raq4lHJhr-a6jYcuFjJrAszEESKcesJFGADMxM0nTVrHu5UIeUuZcZJBcEAjfdUybmlbTdYGtMQyQYVugCREG2HAhoiozsAVzUcwFpzxweonHXBaf9Qr76Qv94HU6Q3m7zcPDAflkYFRNF4eGRrLSpHRdOh2QXw5OjGSvji_u7__8PbMXmGu7_YfSp8GCjapJzbPL3Uc-X5qtBD08483Seq-mluZr6I4R85tLiNdXC711BxW140F5JyPvZDLfM_L2Jen98H996mBU_nBZOr2yt_dr68urt9_mT8am11YeLxsRnquHK5u462kbM3PV5cCeW8Tr82a186BNl7Gg1bulhVXnICsdZaWjcel0PLs9If0B0&estsfed=1&uaid=7618922cc658431a8084407d8933e5b3&signup=1&lw=1&fl=easi2&cobrandid=31ffa2bb-717b-40bc-831f-f7f1a66612db&fci=499b84ac-1321-427f-aa17-267ca6975798&wsucxt=1
+                  - text: Create one!
+              - link "Can’t access your account?" [ref=e38] [cursor=pointer]:
+                - /url: "#"
+            - button "Next" [ref=e41] [cursor=pointer]
+      - generic [ref=e44]:
+        - button "Sign-in options" [ref=e47] [cursor=pointer]:
+          - generic [ref=e51]: Sign-in options
+        - button "Sign in with GitHub" [ref=e54] [cursor=pointer]:
+          - generic [ref=e58]: Sign in with GitHub
+    - contentinfo [ref=e59]:
+      - generic [ref=e60]:
+        - link "Terms of use" [ref=e61] [cursor=pointer]:
+          - /url: https://www.microsoft.com/en-US/servicesagreement/
+        - link "Privacy & cookies" [ref=e62] [cursor=pointer]:
+          - /url: https://privacy.microsoft.com/en-US/privacystatement
+        - button "Click here for troubleshooting information" [ref=e63] [cursor=pointer]: ...

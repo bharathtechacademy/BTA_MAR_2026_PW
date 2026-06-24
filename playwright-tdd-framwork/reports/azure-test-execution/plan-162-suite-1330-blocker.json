@@ -1,0 +1,52 @@
+{
+  "date": "2026-06-23",
+  "reRunAttempt": 2,
+  "planId": 162,
+  "suiteId": 1330,
+  "status": "blocked",
+  "blockerType": "azure-authentication",
+  "summary": "All Azure REST endpoints returned 401 Unauthorized. Browser fallback was attempted but no cached Microsoft session exists and password entry cannot be automated (secret). Suite retrieval and execution cannot proceed without valid authentication.",
+  "authAttempts": [
+    {
+      "method": "REST – HTTP Basic ASCII :PAT",
+      "endpoint": "GET https://dev.azure.com/bharattechacademy3/_apis/projects?api-version=7.1",
+      "httpStatus": 401,
+      "note": "PAT may be expired, revoked, or missing required scope (Test Plans Read/Write)"
+    },
+    {
+      "method": "REST – HTTP Basic ASCII :PAT",
+      "endpoint": "GET https://dev.azure.com/bharattechacademy3/Creatio%20CRM/_apis/test/Plans/162/Suites/1330/points?api-version=7.1",
+      "httpStatus": 401
+    },
+    {
+      "method": "REST – HTTP Basic ASCII :PAT",
+      "endpoint": "GET https://dev.azure.com/bharattechacademy3/Creatio%20CRM/_apis/testplan/Plans/162/Suites/1330/TestPoint?api-version=7.1-preview.1",
+      "httpStatus": 401
+    },
+    {
+      "method": "REST – HTTP Basic UTF-8 :PAT",
+      "endpoint": "GET https://dev.azure.com/bharattechacademy3/_apis/projects?api-version=7.1",
+      "httpStatus": 401
+    },
+    {
+      "method": "Browser fallback – Microsoft sign-in",
+      "outcome": "Redirected to Microsoft login; no cached browser session found; password entry not automatable (protected secret)"
+    }
+  ],
+  "executed": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "azureRunId": null,
+  "reportPath": "reports/azure-test-execution/plan-162-suite-1330-execution-report-2026-06-23.html",
+  "screenshotRoot": "screenshots/azure-plan-162-suite-1330/",
+  "discoveredTestCaseIds": [],
+  "azureUpdateFailures": [
+    "Could not retrieve test suite: Azure REST API 401 on all endpoints.",
+    "Browser fallback blocked: no cached session and password is a protected secret.",
+    "No test run created. No results updated. No attachments uploaded."
+  ],
+  "resolution": "Regenerate the PAT at https://dev.azure.com/bharattechacademy3/_usersSettings/tokens with scopes: Test Plans (Read & Write), Work Items (Read). Update AZURE_PAT in .env and re-run the agent."
+}

@@ -1,0 +1,30 @@
+- generic [ref=e5]:
+  - img "Organization background image" [ref=e7]
+  - generic [ref=e8]:
+    - generic [ref=e14]:
+      - img "Microsoft" [ref=e17]
+      - main [ref=e18]:
+        - generic [ref=e21]:
+          - heading "Sign in" [level=1] [ref=e25]
+          - generic [ref=e26]:
+            - alert
+            - generic [ref=e28]:
+              - textbox "Enter your email, phone, or Skype." [active] [ref=e29]:
+                - /placeholder: Email, phone, or Skype
+              - textbox [ref=e30]
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - text: No account?
+              - link "Create a Microsoft account" [ref=e36] [cursor=pointer]:
+                - /url: https://login.live.com/oauth20_authorize.srf?scope=openid+profile+email+offline_access&response_type=code&client_id=51483342-085c-4d86-bf88-cf50c7252078&response_mode=form_post&redirect_uri=https%3a%2f%2flogin.microsoftonline.com%2fcommon%2ffederation%2foauth2msa&state=rQQIARAAnZI9TBRRFIVndmEFgrpsZacFs4U4u_Pe_L5NpkCWccGAgqCJidm8ee8NMzA7M87PslDYSbAjsaMxsbBAC2IsjBb-xIoYQ2WMjZSERmK1jYlZrOyIzUlucnLy3XvP5TyogNqogpBtKJiIQIZAVKDuiBgDXYSaTrCGdFVHxnRBlYCiKnFpqJiv__i8ce_L9Ivti3O_ny8sb_ODTd9rswoJWzu84qZplNSq1SRKojikxAtApZ0kUVJpe0mG_STNqBf2zNVm4i0FjHrBa57f5_lDnt_JjRJCHUWRZFGlhiYqmDARE4RF4KjAodhWFQ1_z52_MZ6lLuxJGHvr7Fdu0AnjVjMKk3Q7_ywXM-y3TMraFbyexSds5ZhF_lozDc0TREEeF6AlQOsfkwAt28UxTlNGXEwwZa01WYDWRMxw6oUCVKE0MT8jQKuZsiS96eMgEWQr8nEwRQW5DjQoQC3JvJT9nWUZlN3UhGXXoyYwdAoZ0UQHGVBUZOKISAFYZJrBNGwjyZCdchAGhJmnOUPZ91OPmgzpOpElR3So3Eu1FdHWERUNpGgIIUARsctRHKYhCX1zNXEYZXFvm2Anf6rvv8wXSNhqhcF-H3_UNyzlawMDQ0XuAneJ6_bxT_tLQ8Xl2Y8PSl8_TTx8--7JRhdze_3VhdVqZl9HAb11_xqqZ9iSZudcNtOS7Q70VWPSBTPzncaUNjdGTLkGDvv5rQK_VSgcF_jNM9ybwf9q0u4w__4s1z33aO_b4-MPr342js5fWZy53XDY1EKKlsezeqe6cldZlCYdx2pEi2OgI7krdwI5uzq2urRi7ha5gyJ3MMJ1R4qbJe4P0&estsfed=1&uaid=ccdf44035d864aceac9a1f51fdab546a&signup=1&lw=1&fl=easi2&cobrandid=31ffa2bb-717b-40bc-831f-f7f1a66612db&fci=499b84ac-1321-427f-aa17-267ca6975798&wsucxt=1
+                - text: Create one!
+            - link "Can’t access your account?" [ref=e38] [cursor=pointer]:
+              - /url: "#"
+          - button "Next" [ref=e41] [cursor=pointer]
+    - contentinfo [ref=e42]:
+      - generic [ref=e43]:
+        - link "Terms of use" [ref=e44] [cursor=pointer]:
+          - /url: https://www.microsoft.com/en-US/servicesagreement/
+        - link "Privacy & cookies" [ref=e45] [cursor=pointer]:
+          - /url: https://privacy.microsoft.com/en-US/privacystatement
+        - button "Click here for troubleshooting information" [ref=e46] [cursor=pointer]: ...

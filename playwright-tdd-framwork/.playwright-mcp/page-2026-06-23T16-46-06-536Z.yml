@@ -1,0 +1,52 @@
+- generic [ref=e79]:
+  - generic [ref=e84]:
+    - img [ref=e85]:
+      - img [ref=e86]
+    - img [ref=e101]:
+      - img [ref=e102]
+    - img [ref=e106]:
+      - img [ref=e107]
+    - img [ref=e111]:
+      - img [ref=e112]
+    - generic [ref=e118]:
+      - generic [ref=e119]: LOG IN TO YOUR ACCOUNT
+      - generic [ref=e121]:
+        - generic [ref=e124]:
+          - generic [ref=e126]: Business email
+          - generic [ref=e131]:
+            - textbox "Business email" [invalid] [ref=e132]: user@domain
+            - generic [ref=e185]:
+              - text: "|"
+              - generic [ref=e186]: Invalid email format
+              - button "Tooltip.Mode.Error Business email" [ref=e187]:
+                - img [ref=e188]
+        - generic [ref=e134] [cursor=pointer]: Forgot password
+        - generic [ref=e137]:
+          - generic [ref=e139]: Password
+          - generic [ref=e144]:
+            - textbox "Password" [invalid] [ref=e145]
+            - button [ref=e146]:
+              - img [ref=e147]
+            - generic [ref=e190]: Enter a value
+            - button "Tooltip.Mode.Error Password" [ref=e192]:
+              - img [ref=e193]
+        - button "LOG IN" [active] [ref=e152] [cursor=pointer]:
+          - generic [ref=e155]: LOG IN
+      - generic [ref=e156]: or log in using
+      - generic [ref=e158]:
+        - generic "LinkedIn" [ref=e159]:
+          - generic [ref=e160]:
+            - img "LinkedIn icon" [ref=e162] [cursor=pointer]
+            - generic [ref=e163]: LinkedIn
+        - generic "Google" [ref=e164]:
+          - generic [ref=e165]:
+            - img "Google icon" [ref=e167] [cursor=pointer]
+            - generic [ref=e168]: Google
+      - generic [ref=e169]: Don’t have an account?
+      - button "SIGN UP" [ref=e171]:
+        - generic [ref=e174]: SIGN UP
+    - generic [ref=e176]: One PlatformFreedomGenuine Care
+  - iframe [ref=e78]:
+    
+  - button "Open cookie settings widget" [ref=e179] [cursor=pointer]:
+    - img [ref=e180]

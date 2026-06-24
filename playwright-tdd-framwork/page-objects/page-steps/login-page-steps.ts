@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import loginPage  from '../page-elements/login-page-elements.json' with { type: 'json' };
 import { WebCommons } from  '../../commons/ui/web-commons.js'
 import config from '../../config/config.json' with { type: 'json' };
@@ -29,6 +29,11 @@ export class LoginPageSteps {
         if (password) {
             await this.web.enterText(loginPage.passwordTextBox, password);
         }
+    }
+
+    //Method to click on the Password field.
+    async clickPasswordField() {
+        await this.web.clickElement(loginPage.passwordTextBox);
     }
 
     //Method to click on the login button
@@ -69,7 +74,17 @@ export class LoginPageSteps {
 
     //Method to verify error message displayed when user login with invalid credentials 
     async verifyErrorMessageForInvalidCredentials(expectedErrorMsg: string) {
-        await this.web.isElementVisible(loginPage.loginErrorMessage);
+        await expect(this.page.getByText(expectedErrorMsg, { exact: false })).toBeVisible();
+    }
+
+    //Method to verify the validation error message for the Business Email field.
+    async verifyBusinessEmailValidationMessageIsDisplayed(expectedErrorMsg: string) {
+        await expect(this.page.getByText(expectedErrorMsg, { exact: false })).toBeVisible();
+    }
+
+    //Method to verify the validation error message for the Password field.
+    async verifyPasswordValidationMessageIsDisplayed(expectedErrorMsg: string) {
+        await expect(this.page.getByText('Invalid value.', { exact: false })).toBeVisible();
     }
 
 }
