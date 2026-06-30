@@ -1,0 +1,60 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+
+parameters:
+  - name: TestSuite
+    displayName: 'Select the test suite to run test cases'
+    type: string
+    default: 'ui'
+    values:
+      - ui
+      - api
+      - load
+      - ai
+      - db
+      - test
+  
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '24.x'
+  displayName: 'Install Node.js'
+
+- script: npm install
+  displayName: 'Install all the dependencies'
+
+- script: npx playwright install chromium --with-deps
+  displayName: 'Install Chromium browser'
+
+- script: npm run ${{parameters.TestSuite}}
+  displayName: 'Run Specific Test Suite'
+
+- script: npm run allure:generate
+  displayName: 'Generate Allure Report'
+- task: PublishPipelineArtifact@1
+  condition: always()
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/playwright-report'
+    artifact: 'playwright-test-results-report'
+    publishLocation: 'pipeline'
+  displayName: 'Execution completed and publishing the Test Results'
+
+- task: PublishPipelineArtifact@1
+  condition: always()
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/allure-report'
+    artifact: 'playwright-allure-results-report'
+    publishLocation: 'pipeline'
+  displayName: 'Publishing Allure Test Results'
+
+
+

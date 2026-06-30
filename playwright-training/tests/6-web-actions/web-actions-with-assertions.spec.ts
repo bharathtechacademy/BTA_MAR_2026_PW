@@ -190,6 +190,9 @@ Hyperlink Element Validations
     await hyperlink.click();
     await expect(page).toHaveURL('https://www.example.com/expected-link');
 
+    //get new page 
+    const newPage = await page.waitForEvent('popup');
+
     /* ================================================
 Text Element Validations
 ==================================================== */
